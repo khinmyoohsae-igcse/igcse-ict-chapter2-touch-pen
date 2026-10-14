@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IGCSE ICT - Input Devices Part 2 Quiz (40 MCQs)</title>
+    <style>
+        :root {
+            --bg-main: #090d16;
+            --bg-card: #131d31;
+            --border-color: #223354;
+            --accent: #38bdf8;
+            --accent-hover: #0ea5e9;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        header {
+            background-color: var(--bg-card);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1.5rem 1rem;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        header h1 {
+            color: var(--accent);
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 0.35rem;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        main {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 1rem;
+            max-width: 800px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .quiz-status {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.25rem;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .score-pill {
+            background-color: #0c4a6e;
+            color: #7dd3fc;
+            padding: 0.35rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid #0284c7;
+        }
+
+        .card {
+            width: 100%;
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 1.25rem;
+            padding: 2rem;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .question-text {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #f1f5f9;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .option-btn {
+            width: 100%;
+            text-align: left;
+            background-color: #1e293b;
+            color: var(--text-main);
+            padding: 1rem 1.25rem;
+            border-radius: 0.85rem;
+            border: 1px solid #334155;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            background-color: #283548;
+            border-color: var(--accent);
+            transform: translateY(-1px);
+        }
+
+        .option-btn:disabled {
+            cursor: not-allowed;
+        }
+
+        .option-btn.correct {
+            background-color: #064e3b !important;
+            border-color: #059669 !important;
+            color: #ecfdf5 !important;
+        }
+
+        .option-btn.incorrect {
+            background-color: #7f1d1d !important;
+            border-color: #dc2626 !important;
+            color: #fee2e2 !important;
+        }
+
+        .feedback-box {
+            padding: 1.15rem;
+            border-radius: 0.85rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .feedback-box.correct-feedback {
+            background-color: #022c22;
+            border: 1px solid #047857;
+            color: #a7f3d0;
+        }
+
+        .feedback-box.incorrect-feedback {
+            background-color: #450a0a;
+            border: 1px solid #b91c1c;
+            color: #fecdd3;
+        }
+
+        .btn-primary {
+            background-color: var(--accent);
+            color: #0f172a;
+            font-weight: 700;
+            padding: 0.85rem 1.75rem;
+            border-radius: 0.85rem;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.2s ease, transform 0.1s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-1px);
+        }
+
+        .results-card {
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+
+        .results-card h2 {
+            font-size: 2.25rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .results-card p {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        footer {
+            background-color: var(--bg-card);
+            border-top: 1px solid var(--border-color);
+            padding: 1rem;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>IGCSE ICT Practice Quiz</h1>
+        <p>Topics 2.1.6 to 2.1.11 (Touch Screens, Scanners, Cameras, Mics, Sensors & Light Pens)</p>
+    </header>
+
+    <main>
+        <div class="quiz-status">
+            <span id="question-counter">Question 1 of 40</span>
+            <span id="score-display" class="score-pill">Score: 0</span>
+        </div>
+
+        <!-- Quiz Container -->
+        <div id="quiz-container" class="card">
+            <div id="question-box" class="question-text">
+                Loading question...
+            </div>
+
+            <div id="options-container" class="options-list">
+                <!-- Options populated dynamically -->
+            </div>
+
+            <div id="feedback-box" class="feedback-box hidden">
+                <!-- Feedback populated dynamically -->
+            </div>
+
+            <div style="display: flex; justify-content: flex-end;">
+                <button id="next-btn" onclick="nextQuestion()" class="btn-primary hidden">Next Question</button>
+            </div>
+        </div>
+
+        <!-- Results Container -->
+        <div id="results-container" class="card results-card hidden">
+            <h2>Quiz Completed! 🎉</h2>
+            <p id="final-score">You scored X out of 40</p>
+            <button onclick="restartQuiz()" class="btn-primary">Restart Quiz</button>
+        </div>
+    </main>
+
+    <footer>
+        IGCSE ICT Revision &bull; Input Devices Part 2
+    </footer>
+
+    <script>
+        const questions = [
+            {
+                question: "Why are touch screens unique compared to standard keyboards or mice?",
+                options: [
+                    { text: "They act as both an input device and an output device simultaneously", isCorrect: true, rationale: "Touch screens display visual output while capturing user touch inputs on the same screen surface." },
+                    { text: "They require continuous analogue-to-digital conversion for text typing.", isCorrect: false, rationale: "Keyboards also generate digital signals." },
+                    { text: "They can only be used with stationary desktop computers.", isCorrect: false, rationale: "Touch screens are standard on mobile phones, tablets, and kiosks." },
+                    { text: "They print physical paper copies of documents directly.", isCorrect: false, rationale: "Printing is done by printers." }
+                ]
+            },
+            {
+                question: "What are the three main types of touch screen technologies examined in IGCSE ICT?",
+                options: [
+                    { text: "Capacitive, Infra-red, and Resistive", isCorrect: true, rationale: "The three main touch technologies are capacitive, infra-red, and resistive." },
+                    { text: "Magnetic, Optical, and Thermal", isCorrect: false, rationale: "These are not the three standard touch screen categories." },
+                    { text: "Analogue, Digital, and Binary", isCorrect: false, rationale: "These refer to signal types." },
+                    { text: "Laser, Inkjet, and Dot-matrix", isCorrect: false, rationale: "These are printer technologies." }
+                ]
+            },
+            {
+                question: "How does a capacitive touch screen detect touch input?",
+                options: [
+                    { text: "Using layers of glass that change electrostatic charge when touched by a bare finger or conductive stylus", isCorrect: true, rationale: "Capacitive touch screens rely on human body electrical conductivity to alter electrostatic fields." },
+                    { text: "Using a grid of invisible infra-red light beams across the screen surface", isCorrect: false, rationale: "This describes infra-red touch screens." },
+                    { text: "Using flexible physical pressure-sensitive plastic layers pressed together", isCorrect: false, rationale: "This describes resistive touch screens." },
+                    { text: "Using magnetic resonance imaging coils behind the display", isCorrect: false, rationale: "This is medical imaging, not touch screens." }
+                ]
+            },
+            {
+                question: "What is a key advantage of capacitive touch screens over resistive touch screens?",
+                options: [
+                    { text: "They support multi-touch gestures (like pinching/zooming) and offer high image clarity and durability", isCorrect: true, rationale: "Capacitive screens allow multi-touch and let more light through for sharper images." },
+                    { text: "They can be operated easily while wearing thick winter gloves or using non-conductive objects", isCorrect: false, rationale: "Capacitive screens require bare fingers or conductive styli, unlike resistive screens." },
+                    { text: "They are significantly cheaper to manufacture than any other display type", isCorrect: false, rationale: "Resistive screens are typically cheaper." },
+                    { text: "They do not require any electrical power to operate", isCorrect: false, rationale: "All screens require electrical power." }
+                ]
+            },
+            {
+                question: "How do resistive touch screens function when a user presses the screen?",
+                options: [
+                    { text: "Two flexible metallic-coated layers are pressed together to complete an electrical circuit at the contact point", isCorrect: true, rationale: "Resistive touch screens register pressure when top and bottom layers touch, altering current." },
+                    { text: "They measure changes in the electrostatic field of bare human fingertips", isCorrect: false, rationale: "This describes capacitive touch screens." },
+                    { text: "They break invisible infra-red light beams across the screen frame", isCorrect: false, rationale: "This describes infra-red touch screens." },
+                    { text: "They scan fingerprints optically", isCorrect: false, rationale: "This is biometric scanning." }
+                ]
+            },
+            {
+                question: "What is an advantage of a resistive touch screen?",
+                options: [
+                    { text: "They can be operated using gloved fingers, fingernails, or any stylus pointer", isCorrect: true, rationale: "Because they respond to physical pressure rather than electrical conductivity, anything can be used to press them." },
+                    { text: "They support complex multi-touch pinch-to-zoom gestures effortlessly", isCorrect: false, rationale: "Resistive screens typically only support single-touch input." },
+                    { text: "They provide 100% crystal-clear light transmission without glare", isCorrect: false, rationale: "Their multi-layer film construction reduces light transmission slightly compared to capacitive glass." },
+                    { text: "They never suffer from physical wear and tear", isCorrect: false, rationale: "Their flexible layers can wear out over time." }
+                ]
+            },
+            {
+                question: "How do infra-red (IR) touch screens detect where the user is touching?",
+                options: [
+                    { text: "Using a grid of invisible infra-red light beams across the screen; touching the screen breaks the beams", isCorrect: true, rationale: "IR touch screens use LED emitters and sensors around the bezel; blocking the beams pinpoints touch coordinates." },
+                    { text: "Using electrostatic capacitance changes on glass", isCorrect: false, rationale: "This is capacitive technology." },
+                    { text: "Using flexible pressure layers", isCorrect: false, rationale: "This is resistive technology." },
+                    { text: "Using acoustic sound waves bouncing off the glass surface", isCorrect: false, rationale: "This is surface acoustic wave technology." }
+                ]
+            },
+            {
+                question: "What is an advantage of infra-red touch screens used in public kiosks or outdoor environments?",
+                options: [
+                    { text: "They are extremely durable, immune to screen scratches affecting touch, and can be operated with gloves or any object", isCorrect: true, rationale: "Since touch relies on breaking light beams rather than physical pressure or glass conductivity, the screen remains rugged." },
+                    { text: "They are the thinnest and cheapest touch screens available for smartphones", isCorrect: false, rationale: "IR frames are bulky and mostly used on larger kiosk screens." },
+                    { text: "They do not require electricity to emit infra-red light beams", isCorrect: false, rationale: "LED emitters require power." },
+                    { text: "They support unlimited multi-touch drawing sensitivity", isCorrect: false, rationale: "Resolution is limited by the spacing of the LED beam grid." }
+                ]
+            },
+            {
+                question: "What is the primary function of a scanner (such as a flatbed scanner)?",
+                options: [
+                    { text: "To optically scan physical paper documents, photographs, or drawings and convert them into digital image files", isCorrect: true, rationale: "Scanners capture physical hard-copy documents and translate them into digital graphics for computers." },
+                    { text: "To print multi-part carbon-copy invoices onto paper", isCorrect: false, rationale: "Printing is an output function." },
+                    { text: "To read barcodes at supermarket checkout counters", isCorrect: false, rationale: "Barcode scanners are specialized DDE readers." },
+                    { text: "To store permanent backup files on magnetic tape", isCorrect: false, rationale: "Tape is backing storage." }
+                ]
+            },
+            {
+                question: "What software technology is frequently used alongside scanners to convert scanned text images into editable word-processor text?",
+                options: [
+                    { text: "Optical Character Recognition (OCR)", isCorrect: true, rationale: "OCR software analyzes scanned character shapes and converts them into editable digital text files." },
+                    { text: "Analogue-to-Digital Converter (ADC)", isCorrect: false, rationale: "ADCs convert electrical wave voltages, not document text shapes." },
+                    { text: "Computer-Assisted Translation (CAT)", isCorrect: false, rationale: "CAT translates languages." },
+                    { text: "Disk defragmenter utility", isCorrect: false, rationale: "Defragmenters organize storage drives." }
+                ]
+            },
+            {
+                question: "How do digital cameras capture photographs?",
+                options: [
+                    { text: "Light passes through a lens onto a digital sensor (CCD or CMOS) containing millions of light-sensitive pixels", isCorrect: true, rationale: "Digital sensors capture light levels and convert them into digital pixel grids stored on memory cards." },
+                    { text: "Using magnetic tape cassettes spun by a motorized drum", isCorrect: false, rationale: "This describes magnetic tape backing storage." },
+                    { text: "Using chemical film rolls that require darkroom liquid development", isCorrect: false, rationale: "This describes traditional film cameras, not digital ones." },
+                    { text: "Using an infrared thermal scanner", isCorrect: false, rationale: "Thermal scanners measure body heat." }
+                ]
+            },
+            {
+                question: "What factors determine the quality and file size of an image captured by a digital camera?",
+                options: [
+                    { text: "Resolution (number of megapixels), lens quality, and compression settings", isCorrect: true, rationale: "Higher megapixel counts and better lenses capture finer detail, resulting in larger digital files." },
+                    { text: "The CPU clock speed of the user's desktop computer", isCorrect: false, rationale: "Computer specs do not affect in-camera capture quality." },
+                    { text: "The type of ink installed in the printer", isCorrect: false, rationale: "Printers are output devices." },
+                    { text: "The voltage of the wall power outlet", isCorrect: false, rationale: "Cameras run on portable batteries." }
+                ]
+            },
+            {
+                question: "What is the primary function of a microphone when connected to a computer?",
+                options: [
+                    { text: "To capture physical sound waves (acoustic audio) and convert them into analogue electrical signals for recording or input", isCorrect: true, rationale: "Microphones act as audio input devices converting sound vibrations into electrical signals." },
+                    { text: "To amplify music and project sound waves out to listeners", isCorrect: false, rationale: "Projecting sound is the job of loudspeakers." },
+                    { text: "To convert digital data into analogue control signals", isCorrect: false, rationale: "This is a DAC." },
+                    { text: "To measure ambient air temperature in a room", isCorrect: false, rationale: "Temperature is measured by sensors." }
+                ]
+            },
+            {
+                question: "What hardware component is required inside a computer system to convert the analogue electrical signals from a microphone into digital audio data?",
+                options: [
+                    { text: "Analogue to Digital Converter (ADC)", isCorrect: true, rationale: "Microphones output analogue electrical waves, which must be sampled and converted to digital binary by an ADC." },
+                    { text: "Digital to Analogue Converter (DAC)", isCorrect: false, rationale: "A DAC converts digital files back to analogue for speakers." },
+                    { text: "Network Interface Card (NIC)", isCorrect: false, rationale: "An NIC connects computers to networks." },
+                    { text: "Arithmetic and Logic Unit (ALU)", isCorrect: false, rationale: "The ALU performs calculations." }
+                ]
+            },
+            {
+                question: "What is a sensor in computer-controlled and monitoring systems?",
+                options: [
+                    { text: "An input device that measures physical environmental quantities (like temperature, light, or pressure) and sends data to a computer", isCorrect: true, rationale: "Sensors monitor real-world conditions for automated control and monitoring systems." },
+                    { text: "An output actuator that physically moves machinery", isCorrect: false, rationale: "Actuators perform physical actions, whereas sensors measure conditions." },
+                    { text: "A permanent ROM chip storing system startup boot code", isCorrect: false, rationale: "Startup code is stored in ROM." },
+                    { text: "A software compiler translating high-level code", isCorrect: false, rationale: "Compilers are system software." }
+                ]
+            },
+            {
+                question: "Which type of sensor would be used in an automatic greenhouse monitoring system to measure sunlight levels?",
+                options: [
+                    { text: "Light sensor", isCorrect: true, rationale: "Light sensors measure light intensity levels in automated agricultural or environmental systems." },
+                    { text: "Temperature sensor", isCorrect: false, rationale: "Temperature sensors measure heat." },
+                    { text: "pH sensor", isCorrect: false, rationale: "pH sensors measure chemical acidity/alkalinity." },
+                    { text: "Pressure sensor", isCorrect: false, rationale: "Pressure sensors measure force." }
+                ]
+            },
+            {
+                question: "Why must data from physical sensors pass through an Analogue-to-Digital Converter (ADC) before reaching a computer's microprocessor?",
+                options: [
+                    { text: "Sensors output continuous analogue signals, but computers are digital devices that only process binary data", isCorrect: true, rationale: "Microprocessors require discrete digital binary values, necessitating an ADC between analogue sensors and the CPU." },
+                    { text: "To amplify the electrical voltage so the cables do not melt", isCorrect: false, rationale: "ADCs convert signal formats, not power amplification." },
+                    { text: "To translate high-level programming code into machine code", isCorrect: false, rationale: "Code translation is handled by compilers." },
+                    { text: "To increase hard disk storage capacity", isCorrect: false, rationale: "Storage capacity is unrelated to conversion." }
+                ]
+            },
+            {
+                question: "What is a light pen?",
+                options: [
+                    { text: "A wand-like input device containing a light sensor at its tip, used to select objects or draw directly onto a CRT display screen", isCorrect: true, rationale: "Light pens detect light emitted from screen pixels when pointed at them, allowing direct on-screen selection." },
+                    { text: "A standard plastic ballpoint pen with built-in blue ink for writing on paper", isCorrect: false, rationale: "This is a normal stationery pen." },
+                    { text: "An optical barcode reader shaped like a wand", isCorrect: false, rationale: "Wand scanners read barcodes, whereas light pens interact with screen displays." },
+                    { text: "A digital stylus used exclusively on capacitive smartphones", isCorrect: false, rationale: "Capacitive styli do not use light sensors." }
+                ]
+            },
+            {
+                question: "Why have light pens largely fallen out of common modern computer usage?",
+                options: [
+                    { text: "Because modern flat-screen LCD/OLED displays do not emit scanning electron beams like old CRT monitors, and touch screens/mice are more convenient", isCorrect: true, rationale: "Light pens required CRT electron gun refresh timing to calculate screen coordinates, making them obsolete on modern flat panels." },
+                    { text: "Because typing on keyboards became illegal in schools", isCorrect: false, rationale: "This is incorrect." },
+                    { text: "Because light pens require nuclear battery power sources", isCorrect: false, rationale: "This is false." },
+                    { text: "Because mice cannot be used alongside light pens", isCorrect: false, rationale: "This is incorrect." }
+                ]
+            },
+            {
+                question: "Which summary best highlights the role of input devices in computer systems?",
+                options: [
+                    { text: "Input devices capture physical or manual data from the real world and translate it into electronic signals that the computer system can process", isCorrect: true, rationale: "Input devices bridge the external environment or human user with the internal processing computer." },
+                    { text: "Input devices only display graphical video output onto screens for human viewing", isCorrect: false, rationale: "Displaying output is the role of output devices like monitors." },
+                    { text: "Input devices permanently store millions of backup files on magnetic disks", isCorrect: false, rationale: "Permanent file storage is handled by backing storage." },
+                    { text: "Input devices supply continuous electrical power to motherboards", isCorrect: false, rationale: "Power is supplied by the PSU." }
+                ]
+            },
+            {
+                question: "What potential issue can occur with resistive touch screens after long-term continuous use in a busy environment?",
+                options: [
+                    { text: "The flexible top plastic layer can become worn or fatigued, reducing touch accuracy", isCorrect: true, rationale: "Continuous physical pressure on the flexible layers of a resistive screen can cause physical degradation over time." },
+                    { text: "The electrostatic glass layers melt from human body heat", isCorrect: false, rationale: "Body heat cannot melt touch screen glass." },
+                    { text: "The infra-red LED emitters burn out instantly", isCorrect: false, rationale: "Infra-red LEDs are used in IR frames, not resistive screens." },
+                    { text: "The screen resolution automatically drops to 1 bit", isCorrect: false, rationale: "Touch sensitivity does not alter display resolution." }
+                ]
+            },
+            {
+                question: "Why might a graphic designer prefer a capacitive touch screen or digitizer tablet over a resistive touch screen?",
+                options: [
+                    { text: "Capacitive screens provide higher touch sensitivity, smoother multi-touch response, and superior optical clarity without dimming layers", isCorrect: true, rationale: "Capacitive glass lets more light through and tracks precise stylus/finger movements fluidly." },
+                    { text: "Capacitive screens are operated exclusively by pushing hard with fingernails", isCorrect: false, rationale: "Capacitive screens do not require hard pressure." },
+                    { text: "Resistive screens cannot display color images", isCorrect: false, rationale: "Both screen types display full color." },
+                    { text: "Resistive screens require expensive nuclear batteries", isCorrect: false, rationale: "This is false." }
+                ]
+            },
+            {
+                question: "When scanning an old physical photograph into a computer, what determines how detailed and sharp the resulting digital image will be?",
+                options: [
+                    { text: "The scanning resolution (measured in DPI - Dots Per Inch)", isCorrect: true, rationale: "Higher DPI scanner settings capture finer details and pixels from the original photo." },
+                    { text: "The scanning speed of the internal cooling fan", isCorrect: false, rationale: "Fans do not affect image resolution." },
+                    { text: "The USB cable length connecting the scanner to the wall", isCorrect: false, rationale: "Cable length does not change DPI." },
+                    { text: "The amount of RAM installed in the printer", isCorrect: false, rationale: "Printers are output devices." }
+                ]
+            },
+            {
+                question: "What is a disadvantage of setting a scanner to a very high resolution (high DPI) when scanning documents?",
+                options: [
+                    { text: "It creates extremely large digital file sizes that take longer to transfer and consume more storage space", isCorrect: true, rationale: "High DPI captures massive pixel detail, resulting in bloated file sizes." },
+                    { text: "It automatically translates the document into French", isCorrect: false, rationale: "Scanning resolution does not control language translation." },
+                    { text: "It turns the color document into black-and-white text only", isCorrect: false, rationale: "High resolution preserves color depth." },
+                    { text: "It causes the physical paper document to dissolve inside the scanner", isCorrect: false, rationale: "Paper remains unharmed." }
+                ]
+            },
+            {
+                question: "How do digital cameras store captured images before they are transferred to a computer?",
+                options: [
+                    { text: "On removable solid-state memory cards (such as SD cards)", isCorrect: true, rationale: "Digital cameras save image files onto internal flash memory or removable SD memory cards." },
+                    { text: "On spinning magnetic tape reels inside the camera lens", isCorrect: false, rationale: "Cameras do not use tape reels." },
+                    { text: "On read-only memory boot chips", isCorrect: false, rationale: "ROM cannot be written to by the camera user." },
+                    { text: "On punch cards fed through the camera flash mount", isCorrect: false, rationale: "Punch cards are obsolete." }
+                ]
+            },
+            {
+                question: "What is an advantage of digital cameras over traditional film cameras in professional photography?",
+                options: [
+                    { text: "Images can be viewed instantly on an LCD screen, deleted if unsatisfactory, and transferred without darkroom film development", isCorrect: true, rationale: "Digital photography provides instant feedback, previewing, and immediate electronic transfer." },
+                    { text: "Digital cameras do not require any lenses or glass elements", isCorrect: false, rationale: "Lenses are mandatory for focusing light." },
+                    { text: "Digital cameras have infinite battery life without charging", isCorrect: false, rationale: "Batteries must be recharged." },
+                    { text: "Digital cameras weigh zero grams", isCorrect: false, rationale: "Cameras have physical weight." }
+                ]
+            },
+            {
+                question: "In voice recognition software, what happens to the digital audio data produced after a microphone signal passes through an ADC?",
+                options: [
+                    { text: "The computer compares the digital wave patterns against stored vocabulary databases to convert speech into typed text", isCorrect: true, rationale: "Speech recognition software processes digitized audio waveforms to recognize words and commands." },
+                    { text: "The computer instantly deletes the audio to save RAM", isCorrect: false, rationale: "Audio data is processed, not deleted." },
+                    { text: "The computer sends the audio to a laser printer for ink jet printing", isCorrect: false, rationale: "Voice input is transcribed, not printed directly." },
+                    { text: "The computer converts the audio back into analogue sound waves for speakers", isCorrect: false, rationale: "This is playback, not speech recognition." }
+                ]
+            },
+            {
+                question: "What is a major advantage of using automated sensor input in weather monitoring or scientific research stations?",
+                options: [
+                    { text: "Sensors can log data 24/7 accurately without human fatigue, even in remote or dangerous environments", isCorrect: true, rationale: "Automated sensors operate continuously around the clock in harsh conditions where human presence is difficult." },
+                    { text: "Sensors eliminate the need for any computer microprocessors", isCorrect: false, rationale: "Microprocessors are needed to process sensor readings." },
+                    { text: "Sensors generate their own electricity from magnetic fields", isCorrect: false, rationale: "Sensors require power sources." },
+                    { text: "Sensors can print physical weather reports on paper automatically", isCorrect: false, rationale: "Printing requires a connected printer." }
+                ]
+            },
+            {
+                question: "Which of the following sensors would be crucial in an automated climate-control system designed to open or close greenhouse roof vents?",
+                options: [
+                    { text: "Temperature and humidity sensors", isCorrect: true, rationale: "Monitoring heat and moisture levels allows the system to decide when ventilation is needed." },
+                    { text: "Barcode scanning sensors", isCorrect: false, rationale: "Barcodes are for retail products." },
+                    { text: "Magnetic stripe card readers", isCorrect: false, rationale: "Card readers are for banking cards." },
+                    { text: "Optical mouse movement sensors", isCorrect: false, rationale: "Mouse sensors track desk movement." }
+                ]
+            },
+            {
+                question: "What is the primary difference between how a capacitive touch screen and an infra-red touch screen detect touch locations?",
+                options: [
+                    { text: "Capacitive relies on electrical charge changes from a conductive touch, while infra-red relies on physical interruption of light beams across the screen", isCorrect: true, rationale: "Capacitive uses electrostatic touch conductivity; infra-red uses optical beam interruption." },
+                    { text: "Capacitive uses physical pressure layers, while infra-red uses magnetic tape reels", isCorrect: false, rationale: "This is incorrect." },
+                    { text: "Both technologies rely exclusively on chemical ink reactions", isCorrect: false, rationale: "Touch screens do not use ink." },
+                    { text: "Infra-red screens require the user to wear specialized glowing gloves", isCorrect: false, rationale: "IR screens work with any bare or gloved hand." }
+                ]
+            },
+            {
+                question: "Why might a restaurant order kiosk use a capacitive touch screen instead of a resistive touch screen?",
+                options: [
+                    { text: "To provide a responsive, modern multi-touch interface with high screen brightness and clarity for customers ordering food", isCorrect: true, rationale: "Capacitive screens offer superior clarity and responsiveness for consumer-facing interactive kiosks." },
+                    { text: "Because capacitive screens are operated exclusively by wooden sticks", isCorrect: false, rationale: "Capacitive screens need conductive touch." },
+                    { text: "Because resistive screens are illegal in restaurants", isCorrect: false, rationale: "This is false." },
+                    { text: "Because capacitive screens print paper receipts automatically", isCorrect: false, rationale: "Receipts are printed by thermal printer outputs." }
+                ]
+            },
+            {
+                question: "What role does OCR (Optical Character Recognition) play when scanning a printed book page into a word processor?",
+                options: [
+                    { text: "It translates the graphic image of characters into editable text characters so words can be highlighted, edited, and searched", isCorrect: true, rationale: "Without OCR, a scan is just a flat picture; OCR makes the text fully editable and searchable." },
+                    { text: "It compresses the image file format into a ZIP archive", isCorrect: false, rationale: "Compression is handled by file utilities." },
+                    { text: "It automatically translates English text into Mandarin Chinese", isCorrect: false, rationale: "Translation is done by CAT tools." },
+                    { text: "It prints a duplicate paper copy of the book", isCorrect: false, rationale: "Printing is done by printers." }
+                ]
+            },
+            {
+                question: "What is a disadvantage of digital cameras regarding storage media management?",
+                options: [
+                    { text: "High-resolution photos and 4K videos consume memory card storage quickly, requiring regular file transfers or card replacements", isCorrect: true, rationale: "High-quality media files take up substantial gigabytes, filling up memory cards fast." },
+                    { text: "Memory cards automatically erase all photos every time the camera is turned off", isCorrect: false, rationale: "Memory cards are non-volatile." },
+                    { text: "Digital cameras cannot connect to computers via USB cables", isCorrect: false, rationale: "Cameras connect easily via USB or Wi-Fi." },
+                    { text: "Memory cards require magnetic tape winding motors", isCorrect: false, rationale: "Flash memory has no moving parts." }
+                ]
+            },
+            {
+                question: "How does a microphone contribute to video conferencing applications like Zoom or Microsoft Teams?",
+                options: [
+                    { text: "It captures the user's spoken voice and converts it into digital audio packets transmitted over the internet to other participants", isCorrect: true, rationale: "Microphones capture live speech, enabling real-time audio communication in virtual meetings." },
+                    { text: "It projects the video conference participant's face onto a wall screen", isCorrect: false, rationale: "Projecting video is done by monitors and projectors." },
+                    { text: "It acts as a router connecting the laptop to Wi-Fi", isCorrect: false, rationale: "Network routing is handled by NICs and routers." },
+                    { text: "It scans printed presentation slides", isCorrect: false, rationale: "Scanning is done by scanners." }
+                ]
+            },
+            {
+                question: "Why are sensors considered essential components in modern 'Smart Home' automation systems (such as automated lighting or burglar alarms)?",
+                options: [
+                    { text: "They detect physical triggers (like motion, light, or door opening) and feed real-world data to the microprocessor to trigger automated responses", isCorrect: true, rationale: "Smart home systems rely on continuous sensor input to detect motion or darkness and activate lights or alarms." },
+                    { text: "They supply mains electrical power to household kitchen appliances", isCorrect: false, rationale: "Power is supplied by electrical wiring and power supplies." },
+                    { text: "They print monthly utility bills automatically", isCorrect: false, rationale: "Bills are printed by utility company computers." },
+                    { text: "They function as high-speed gaming graphics cards", isCorrect: false, rationale: "Gaming graphics are handled by GPUs." }
+                ]
+            },
+            {
+                question: "What is a limitation of light pens compared to modern computer mice or touchscreens?",
+                options: [
+                    { text: "They can only be used on specific display types (historically CRT monitors) and cause arm fatigue when held against a vertical screen for long periods", isCorrect: true, rationale: "Holding a pen against a vertical screen causes 'gorilla arm' fatigue, and they are incompatible with modern flat panels." },
+                    { text: "They require high-speed internet broadband connections", isCorrect: false, rationale: "Light pens do not require internet." },
+                    { text: "They cannot select graphical icons", isCorrect: false, rationale: "They were designed for on-screen selection." },
+                    { text: "They weigh over five kilograms", isCorrect: false, rationale: "Light pens are lightweight." }
+                ]
+            },
+            {
+                question: "Which input device would be most appropriate for a security guard verifying employee badges at a high-security facility entrance using optical barcodes or RFID tags?",
+                options: [
+                    { text: "Barcode reader or RFID scanner", isCorrect: true, rationale: "Security checkpoints use barcode or RFID scanners for fast direct data entry and identification." },
+                    { text: "A standard music microphone", isCorrect: false, rationale: "Microphones capture voice audio." },
+                    { text: "A computer joystick", isCorrect: false, rationale: "Joysticks are for gaming and simulation." },
+                    { text: "A flatbed document scanner", isCorrect: false, rationale: "Flatbed scanners are bulky office devices unsuited for rapid badge swiping." }
+                ]
+            },
+            {
+                question: "When a digital camera is connected to a computer, how are the photo files typically accessed?",
+                options: [
+                    { text: "The computer's operating system recognizes the camera or memory card as removable storage, allowing files to be copied or dragged across", isCorrect: true, rationale: "Cameras mount as removable drives, letting users transfer image files easily via USB file explorer." },
+                    { text: "The camera automatically reformats the computer's hard drive", isCorrect: false, rationale: "Camera connection does not reformat hard drives." },
+                    { text: "The computer prints every photo onto paper automatically", isCorrect: false, rationale: "Auto-printing does not occur." },
+                    { text: "The files must be translated by an ADC first", isCorrect: false, rationale: "Photos are already digital files." }
+                ]
+            },
+            {
+                question: "What is a key similarity between touch screens, digital cameras, and scanners?",
+                options: [
+                    { text: "They all rely on optical sensing or light-sensitive technology to capture input data", isCorrect: true, rationale: "Touch screens, digital cameras, and scanners all utilize light or optical sensors to detect touch coordinates or image pixels." },
+                    { text: "They all print hard-copy documents onto paper", isCorrect: false, rationale: "None of these are printers." },
+                    { text: "They all require magnetic tape reels to operate", isCorrect: false, rationale: "None use magnetic tape." },
+                    { text: "They are all exclusively used inside industrial robotic arms", isCorrect: false, rationale: "They are used across consumer and office tech." }
+                ]
+            },
+            {
+                question: "Which of the following best summarizes the overall importance of studying input devices in IGCSE ICT Chapter 2?",
+                options: [
+                    { text: "To understand how different data types (text, graphics, sound, physical environment variables) are captured from the real world into computer systems", isCorrect: true, rationale: "Chapter 2 explores the specific mechanisms and best-fit use cases for capturing manual, direct, and environmental data." },
+                    { text: "To learn how to manufacture silicon microchips in semiconductor cleanrooms", isCorrect: false, rationale: "Chip manufacturing is hardware engineering, not ICT theory." },
+                    { text: "To memorize the history of mechanical typewriters from the 19th century", isCorrect: false, rationale: "Typewriters are historical background, not the core input focus." },
+                    { text: "To program 3D video game graphics engines in C++", isCorrect: false, rationale: "Programming is software development." }
+                ]
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let answered = false;
+
+        const questionCounter = document.getElementById("question-counter");
+        const scoreDisplay = document.getElementById("score-display");
+        const questionBox = document.getElementById("question-box");
+        const optionsContainer = document.getElementById("options-container");
+        const feedbackBox = document.getElementById("feedback-box");
+        const nextBtn = document.getElementById("next-btn");
+        const quizContainer = document.getElementById("quiz-container");
+        const resultsContainer = document.getElementById("results-container");
+        const finalScore = document.getElementById("final-score");
+
+        function loadQuestion() {
+            answered = false;
+            feedbackBox.classList.add("hidden");
+            nextBtn.classList.add("hidden");
+
+            const q = questions[currentQuestionIndex];
+            questionCounter.textContent = `Question ${currentQuestionIndex + 1} of ${questions.length}`;
+            scoreDisplay.textContent = `Score: ${score}`;
+            questionBox.textContent = q.question;
+
+            optionsContainer.innerHTML = "";
+            q.options.forEach((opt, idx) => {
+                const btn = document.createElement("button");
+                btn.className = "option-btn";
+                btn.textContent = opt.text;
+                btn.onclick = () => selectOption(idx);
+                optionsContainer.appendChild(btn);
+            });
+        }
+
+        function selectOption(selectedIndex) {
+            if (answered) return;
+            answered = true;
+
+            const q = questions[currentQuestionIndex];
+            const allOptionButtons = optionsContainer.children;
+
+            q.options.forEach((opt, idx) => {
+                allOptionButtons[idx].disabled = true;
+                if (opt.isCorrect) {
+                    allOptionButtons[idx].classList.add("correct");
+                } else if (idx === selectedIndex) {
+                    allOptionButtons[idx].classList.add("incorrect");
+                }
+            });
+
+            const selectedOpt = q.options[selectedIndex];
+            feedbackBox.classList.remove("hidden");
+            if (selectedOpt.isCorrect) {
+                score++;
+                scoreDisplay.textContent = `Score: ${score}`;
+                feedbackBox.className = "feedback-box correct-feedback";
+                feedbackBox.innerHTML = `<strong>Correct!</strong> ${selectedOpt.rationale}`;
+            } else {
+                feedbackBox.className = "feedback-box incorrect-feedback";
+                feedbackBox.innerHTML = `<strong>Incorrect.</strong> ${selectedOpt.rationale}`;
+            }
+
+            if (currentQuestionIndex < questions.length - 1) {
+                nextBtn.textContent = "Next Question";
+            } else {
+                nextBtn.textContent = "View Results";
+            }
+            nextBtn.classList.remove("hidden");
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < questions.length) {
+                loadQuestion();
+            } else {
+                quizContainer.classList.add("hidden");
+                resultsContainer.classList.remove("hidden");
+                finalScore.textContent = `You scored ${score} out of ${questions.length}`;
+            }
+        }
+
+        function restartQuiz() {
+            currentQuestionIndex = 0;
+            score = 0;
+            resultsContainer.classList.add("hidden");
+            quizContainer.classList.remove("hidden");
+            loadQuestion();
+        }
+
+        // Initialize quiz on load
+        loadQuestion();
+    </script>
+</body>
+</html>
